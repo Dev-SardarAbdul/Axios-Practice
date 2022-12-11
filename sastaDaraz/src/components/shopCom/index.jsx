@@ -19,14 +19,16 @@ function ShopCom() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get("https://fakestoreapi.com/products");
+      setPhotos(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
-    setLoader(true);
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => setPhotos(res.data))
-      .catch((err) => console.log(err));
-    setLoader(false);
+    fetchProducts();
   }, []);
+
   return (
     <MainShop>
       <Container>
